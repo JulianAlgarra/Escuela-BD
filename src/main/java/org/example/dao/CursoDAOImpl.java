@@ -26,7 +26,11 @@ public class CursoDAOImpl implements CursoDAO{
             statement.setString(3, curso.getProfesor());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("foreign key constraint")) {
+                System.out.println("No se puede eliminar: el curso tiene inscripciones activas, elimine la inscripcion.");
+            } else {
+                e.printStackTrace();
+            }
         }
 
     }

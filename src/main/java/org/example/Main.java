@@ -76,6 +76,8 @@ public class Main {
                 System.out.println("0. Salir");
                 System.out.print("Elige una opción: ");
                 opcion = scanner.nextInt();
+                scanner.nextLine(); // limpia el buffer
+
 
                 switch (opcion) {
                     case 1: // Registrar
@@ -83,7 +85,6 @@ public class Main {
                         String nombre = scanner.nextLine();
                         System.out.print("Correo: ");
                         String correo = scanner.nextLine();
-                        scanner.nextLine();
 
                         Estudiante estudiante = new Estudiante(0,nombre, correo);
                         EstudianteDAO.crear(estudiante);
@@ -93,6 +94,8 @@ public class Main {
                     case 2: // Leer
                         System.out.print("Ingrese el Id del Estudiante: ");
                         int idLeer = scanner.nextInt();
+                        scanner.nextLine(); // limpia el buffer
+
                         Estudiante est = EstudianteDAO.leer(idLeer);
                         if (est != null) {
                             System.out.println(est);
@@ -102,8 +105,10 @@ public class Main {
                         break;
 
                     case 3: // Eliminar
-                        System.out.print("Id del Estudiante a eliminar: ");
+                        System.out.print("Id del Estudiante a eliminar, si esta inscrito a algun curso elimine primero las inscripciones: ");
                         int idEliminar = scanner.nextInt();
+                        scanner.nextLine(); // limpia el buffer
+
                         EstudianteDAO.eliminar(idEliminar);
                         System.out.println("Estudiante eliminado.");
                         break;
@@ -147,6 +152,8 @@ public class Main {
                 System.out.println("0. Salir");
                 System.out.print("Elige una opción: ");
                 opcion = scanner.nextInt();
+                scanner.nextLine(); // limpia el buffer
+
 
                 switch (opcion) {
                     case 1: // Registrar
@@ -157,7 +164,7 @@ public class Main {
                         String nombre = scanner.nextLine();
                         System.out.print("Nombre del profesor: ");
                         String profesor = scanner.nextLine();
-                        scanner.nextLine();
+
 
                         Curso curso = new Curso(id, nombre, profesor);
                         CursoDAO.crear(curso);
@@ -176,8 +183,10 @@ public class Main {
                         break;
 
                     case 3: // Eliminar
-                        System.out.print("Id del curso a eliminar: ");
+                        System.out.print("Id del curso a eliminar, si algun estudiante ya se inscribio, elimine primero la inscripcion: ");
                         int idEliminar = scanner.nextInt();
+                        scanner.nextLine(); // limpia el buffer
+
                         CursoDAO.eliminar(idEliminar);
                         System.out.println("Curso eliminado.");
                         break;
@@ -220,6 +229,8 @@ public class Main {
                 System.out.println("0. Salir");
                 System.out.print("Elige una opción: ");
                 opcion = scanner.nextInt();
+                scanner.nextLine(); // limpia el buffer
+
 
                 switch (opcion) {
                     case 1: // Registrar
@@ -231,7 +242,7 @@ public class Main {
                         scanner.nextLine(); // Limpiar el buffer
                         System.out.print("Fecha de registro formato DD/MM/YYYY: ");
                         String fecha = scanner.nextLine();
-                        scanner.nextLine();
+
 
                         Inscripcion inscripcion = new Inscripcion(0,idestudiante, idcurso , fecha);
                         InscripcionDAO.crear(inscripcion);
@@ -241,17 +252,21 @@ public class Main {
                     case 2: // Leer
                         System.out.print("Ingrese el Id de la Inscripcion: ");
                         int idLeer = scanner.nextInt();
+                        scanner.nextLine(); // limpia el buffer
+
                         Inscripcion ins = InscripcionDAO.leer(idLeer);
                         if (ins != null) {
                             System.out.println(ins);
                         } else {
-                            System.out.println("Curso no encontrado.");
+                            System.out.println("Inscripcion no encontrada.");
                         }
                         break;
 
                     case 3: // Eliminar
                         System.out.print("Id de la inscripcion a eliminar: ");
                         int idEliminar = scanner.nextInt();
+                        scanner.nextLine(); // limpia el buffer
+
                         InscripcionDAO.eliminar(idEliminar);
                         System.out.println("Inscripcion eliminada.");
                         break;

@@ -19,8 +19,8 @@ public class EstudianteDAOImpl implements EstudianteDAO {
     public void crear(Estudiante estudiante) {
         String sql = "INSERT INTO estudiante (nombre, correo) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(2, estudiante.getNombre());
-            statement.setString(3, estudiante.getCorreo());
+            statement.setString(1, estudiante.getNombre());
+            statement.setString(2, estudiante.getCorreo());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,7 +55,13 @@ public class EstudianteDAOImpl implements EstudianteDAO {
             statement.setInt(1, estudianteID);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+
+                if (e.getMessage().contains("foreign key constraint")) {
+                    System.out.println("No se puede eliminar: el estudiante tiene inscripciones activas, elimine la inscripcion.");
+                } else {
+                    e.printStackTrace();
+                }
+
         }
 
     }

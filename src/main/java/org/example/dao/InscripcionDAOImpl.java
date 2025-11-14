@@ -20,9 +20,9 @@ public class InscripcionDAOImpl implements InscripcionDAO{
     public void crear(Inscripcion inscripcion) {
         String sql = "INSERT INTO inscripcion (estudianteID, cursoID, fechaInscripcion) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(2, inscripcion.getEstudianteId());
-            statement.setInt(3, inscripcion.getCursoId());
-            statement.setString(4, inscripcion.getInscripcionFecha());
+            statement.setInt(1, inscripcion.getEstudianteId());
+            statement.setInt(2, inscripcion.getCursoId());
+            statement.setString(3, inscripcion.getInscripcionFecha());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class InscripcionDAOImpl implements InscripcionDAO{
     @Override
     public List<Inscripcion> listar() {
         List<Inscripcion> inscripciones = new ArrayList<>();
-        String sql = "SELECT * FROM estudiante";
+        String sql = "SELECT * FROM inscripcion";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
